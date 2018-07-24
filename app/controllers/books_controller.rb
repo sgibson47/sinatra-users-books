@@ -1,31 +1,31 @@
 class BooksController < ApplicationController
-  get '/tweets' do
+  get '/books' do
     if logged_in?
-      @tweets = Tweet.all
-      erb :'tweets/tweets'
+      @books = Book.all
+      erb :'books/books'
     else
       redirect to '/login'
     end
   end
 
-  get '/tweets/new' do
+  get '/books/new' do
     if logged_in?
-      erb :'tweets/create_tweet'
+      erb :'books/create_book'
     else
       redirect to '/login'
     end
   end
 
-  post '/tweets' do
+  post '/books' do
     if logged_in?
-      if params[:content] == ""
-        redirect to "/tweets/new"
+      if params[:title] == ""
+        redirect to "/books/new"
       else
-        @tweet = current_user.tweets.build(content: params[:content])
-        if @tweet.save
-          redirect to "/tweets/#{@tweet.id}"
+        @book = current_user.books.build(title: params[:title])
+        if @book.save
+          redirect to "/books/#{@book.id}"
         else
-          redirect to "/tweets/new"
+          redirect to "/books/new"
         end
       end
     else
@@ -33,42 +33,42 @@ class BooksController < ApplicationController
     end
   end
 
-  get '/tweets/:id' do
+  get '/books/:id' do
     if logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
-      erb :'tweets/show_tweet'
+      @book = Book.find_by_id(params[:id])
+      erb :'books/show_book'
     else
       redirect to '/login'
     end
   end
 
-  get '/tweets/:id/edit' do
+  get '/books/:id/edit' do
     if logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
-      if @tweet && @tweet.user == current_user
-        erb :'tweets/edit_tweet'
+      @book = Book.find_by_id(params[:id])
+      if @book && @book.user == current_user
+        erb :'books/edit_book'
       else
-        redirect to '/tweets'
+        redirect to '/books'
       end
     else
       redirect to '/login'
     end
   end
 
-  patch '/tweets/:id' do
+  patch '/books/:id' do
     if logged_in?
-      if params[:content] == ""
-        redirect to "/tweets/#{params[:id]}/edit"
+      if params[:title] == ""
+        redirect to "/books/#{params[:id]}/edit"
       else
-        @tweet = Tweet.find_by_id(params[:id])
-        if @tweet && @tweet.user == current_user
-          if @tweet.update(content: params[:content])
-            redirect to "/tweets/#{@tweet.id}"
+        @book = Book.find_by_id(params[:id])
+        if @book && @book.user == current_user
+          if @book.update(title: params[:title])
+            redirect to "/books/#{@book.id}"
           else
-            redirect to "/tweets/#{@tweet.id}/edit"
+            redirect to "/books/#{@book.id}/edit"
           end
         else
-          redirect to '/tweets'
+          redirect to '/books'
         end
       end
     else
@@ -76,13 +76,13 @@ class BooksController < ApplicationController
     end
   end
 
-  delete '/tweets/:id/delete' do
+  delete '/books/:id/delete' do
     if logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
-      if @tweet && @tweet.user == current_user
-        @tweet.delete
+      @book = Book.find_by_id(params[:id])
+      if @book && @book.user == current_user
+        @book.delete
       end
-      redirect to '/tweets'
+      redirect to '/books'
     else
       redirect to '/login'
     end
