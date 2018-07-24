@@ -6,10 +6,10 @@ describe 'index action' do
   context 'logged in' do
     it 'lets a user view the books index if logged in' do
       user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-      book1 = Book.create(:title => "tweeting!", :user_id => user.id, :price => 14.50, :times_read => 1, :date_purchased => 01/01/2010)
+      book1 = Book.create(:title => "tweeting!", :user_id => user.id)
 
       user2 = User.create(:username => "silverstallion", :email => "silver@aol.com", :password => "horses")
-      book2 = Book.create(:title => "tweet tweet tweet", :user_id => user.id, :price => 14.50, :times_read => 1, :date_purchased => 01/01/2010)
+      book2 = Book.create(:title => "tweet tweet tweet", :user_id => user.id)
 
       visit '/login'
 
@@ -119,7 +119,7 @@ describe 'show action' do
     it 'displays a single book' do
 
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-      book = Book.create(:title => "i am a boss", :user_id => user.id, :price => 14.50, :times_read => 1, :date_purchased => 01/01/2010)
+      book = Book.create(:title => "i am a boss", :user_id => user.id)
 
       visit '/login'
 
@@ -138,7 +138,7 @@ describe 'show action' do
   context 'logged out' do
     it 'does not let a user view a book' do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-      book = Book.create(:title => "i am a boss", :user_id => user.id, :price => 14.50, :times_read => 1, :date_purchased => 01/01/2010)
+      book = Book.create(:title => "i am a boss", :user_id => user.id)
       get "/books/#{book.id}"
       expect(last_response.location).to include("/login")
     end
@@ -149,7 +149,7 @@ describe 'edit action' do
   context "logged in" do
     it 'lets a user view book edit form if they are logged in' do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-      book = Book.create(:title => "tweeting!", :user_id => user.id, :price => 14.50, :times_read => 1, :date_purchased => 01/01/2010)
+      book = Book.create(:title => "tweeting!", :user_id => user.id)
       visit '/login'
 
       fill_in(:username, :with => "becky567")
@@ -162,10 +162,10 @@ describe 'edit action' do
 
     it 'does not let a user edit a book they did not create' do
       user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-      book1 = Book.create(:title => "tweeting!", :user_id => user.id, :price => 14.50, :times_read => 1, :date_purchased => 01/01/2010)
+      book1 = Book.create(:title => "tweeting!", :user_id => user.id)
 
       user2 = User.create(:username => "silverstallion", :email => "silver@aol.com", :password => "horses")
-      book2 = Book.create(:title => "tweet tweet tweet", :user_id => user.id, :price => 14.50, :times_read => 1, :date_purchased => 01/01/2010)
+      book2 = Book.create(:title => "tweet tweet tweet", :user_id => user.id)
 
       visit '/login'
 
@@ -180,7 +180,7 @@ describe 'edit action' do
 
     it 'lets a user edit their own book if they are logged in' do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-      book = Book.create(:title => "tweeting!", :user_id => user.id, :price => 14.50, :times_read => 1, :date_purchased => 01/01/2010)
+      book = Book.create(:title => "tweeting!", :user_id => user.id)
       visit '/login'
 
       fill_in(:username, :with => "becky567")
@@ -198,7 +198,7 @@ describe 'edit action' do
 
     it 'does not let a user edit a text with blank content' do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-      book = Book.create(:title => "tweeting!", :user_id => user.id, :price => 14.50, :times_read => 1, :date_purchased => 01/01/2010)
+      book = Book.create(:title => "tweeting!", :user_id => user.id)
       visit '/login'
 
       fill_in(:username, :with => "becky567")
@@ -226,7 +226,7 @@ describe 'delete action' do
   context "logged in" do
     it 'lets a user delete their own book if they are logged in' do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-      book = Book.create(:title => "tweeting!", :user_id => user.id, :price => 14.50, :times_read => 1, :date_purchased => 01/01/2010)
+      book = Book.create(:title => "tweeting!", :user_id => user.id)
       visit '/login'
 
       fill_in(:username, :with => "becky567")
@@ -240,10 +240,10 @@ describe 'delete action' do
 
     it 'does not let a user delete a book they did not create' do
       user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-      book1 = Book.create(:title => "tweeting!", :user_id => user.id, :price => 14.50, :times_read => 1, :date_purchased => 01/01/2010)
+      book1 = Book.create(:title => "tweeting!", :user_id => user.id)
 
       user2 = User.create(:username => "silverstallion", :email => "silver@aol.com", :password => "horses")
-      book2 = Book.create(:title => "tweet tweet tweet", :user_id => user.id, :price => 14.50, :times_read => 1, :date_purchased => 01/01/2010)
+      book2 = Book.create(:title => "tweet tweet tweet", :user_id => user.id)
 
       visit '/login'
 
