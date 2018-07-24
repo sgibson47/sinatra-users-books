@@ -133,8 +133,8 @@ end
 describe 'user show page' do
   it 'shows all a single users books' do
     user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-    book1 = Book.create(:title => "tweeting!", :user_id => user.id, :price => 14.50, :times_read => 1, :date_purchased => 01/01/2010)
-    book2 = Book.create(:title => "tweet tweet tweet", :user_id => user.id, :price => 14.50, :times_read => 1, :date_purchased => 01/01/2010)
+    book1 = Book.create(:title => "tweeting!", :user_id => user.id)
+    book2 = Book.create(:title => "tweet tweet tweet", :user_id => user.id)
     get "/users/#{user.slug}"
 
     expect(last_response.body).to include("tweeting!")
