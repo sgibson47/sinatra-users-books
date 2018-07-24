@@ -1,1 +1,7 @@
-show.erb
+
+<p> Here are your tweets, <%= @user.username %>
+<% @user.books.each do |book| %>
+  <div>
+    <%= book.title %>
+  </div>
+<% end %>

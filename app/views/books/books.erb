@@ -1,1 +1,8 @@
-books.erb
+<p> Welcome, <%= current_user.username %>
+<h2> Books </h2>
+
+<% @books.each do |book| %>
+  <div>
+    <%= book.title %>
+  </div>
+<% end %>
