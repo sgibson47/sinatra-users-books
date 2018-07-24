@@ -1,4 +1,4 @@
-class TweetsController < ApplicationController
+class BooksController < ApplicationController
   get '/tweets' do
     if logged_in?
       @tweets = Tweet.all
