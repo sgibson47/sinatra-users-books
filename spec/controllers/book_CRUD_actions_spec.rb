@@ -6,10 +6,10 @@ describe 'index action' do
   context 'logged in' do
     it 'lets a user view the books index if logged in' do
       user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-      book1 = Book.create(:title => "tweeting!", :user_id => user.id)
+      book1 = Book.create(:title => "tweeting!", :user_id => user1.id)
 
       user2 = User.create(:username => "silverstallion", :email => "silver@aol.com", :password => "horses")
-      book2 = Book.create(:title => "tweet tweet tweet", :user_id => user.id)
+      book2 = Book.create(:title => "tweet tweet tweet", :user_id => user2.id)
 
       visit '/login'
 
@@ -148,8 +148,8 @@ end
 describe 'edit action' do
   context "logged in" do
     it 'lets a user view book edit form if they are logged in' do
-      user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-      book = Book.create(:title => "tweeting!", :user_id => user.id)
+      user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+      book = Book.create(:title => "tweeting!", :user_id => user1.id)
       visit '/login'
 
       fill_in(:username, :with => "becky567")
@@ -162,10 +162,10 @@ describe 'edit action' do
 
     it 'does not let a user edit a book they did not create' do
       user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-      book1 = Book.create(:title => "tweeting!", :user_id => user.id)
+      book1 = Book.create(:title => "tweeting!", :user_id => user1.id)
 
       user2 = User.create(:username => "silverstallion", :email => "silver@aol.com", :password => "horses")
-      book2 = Book.create(:title => "tweet tweet tweet", :user_id => user.id)
+      book2 = Book.create(:title => "tweet tweet tweet", :user_id => user2.id)
 
       visit '/login'
 
@@ -240,10 +240,10 @@ describe 'delete action' do
 
     it 'does not let a user delete a book they did not create' do
       user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-      book1 = Book.create(:title => "tweeting!", :user_id => user.id)
+      book1 = Book.create(:title => "tweeting!", :user_id => user1.id)
 
       user2 = User.create(:username => "silverstallion", :email => "silver@aol.com", :password => "horses")
-      book2 = Book.create(:title => "tweet tweet tweet", :user_id => user.id)
+      book2 = Book.create(:title => "look at this tweet", :user_id => user2.id)
 
       visit '/login'
 

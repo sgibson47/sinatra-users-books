@@ -78,7 +78,7 @@ class BooksController < ApplicationController
 
   delete '/books/:id/delete' do
     if logged_in?
-      @book = Book.find_by_id(params[:id])
+      @book = Book.find(params[:id])
       if @book && @book.user == current_user
         @book.delete
       end

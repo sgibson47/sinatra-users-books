@@ -1,8 +1,16 @@
 class UsersController < ApplicationController
 
   get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    erb :'users/show'
+    if logged_in?
+      if @user = User.find_by_slug(params[:slug])
+        erb :'users/show'
+      else
+        @books = Book.all
+        erb :'books/books', locals: {message: "I don't recognize the user whose books you tried to view."}
+      end
+    else
+      erb :'users/login', locals: {message: "Please sign in to view content."}
+    end
   end
 
   get '/signup' do
@@ -14,19 +22,22 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if params[:username] == "" || params[:email] == "" || params[:password] == ""
-      redirect to '/signup'
-    else
-      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-      @user.save
+    @user=User.new
+    @user.username = params[:username]
+    @user.email = params[:email]
+    @user.password = params[:password]
+
+    if @user.save
       session[:user_id] = @user.id
       redirect to '/books'
+    else
+      erb :'users/create_user'
     end
   end
 
   get '/login' do
     if !logged_in?
-      erb :'users/login'
+      erb :'users/create_user'
     else
       redirect to '/books'
     end
