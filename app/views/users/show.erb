@@ -1,5 +1,5 @@
 
-<p> Here are your books, <%= @user.username %>
+<p> Here are <%=@user.username%>'s books</p>
 <% @user.books.each do |book| %>
   <div>
     <%= book.title %>
